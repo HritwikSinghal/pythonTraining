@@ -36,7 +36,7 @@ class Database:
 
     ### --------------------------------------------------------------------- ###
 
-    def get(self, key: str):
+    def get(self, key: str) -> None:
         # print("get", key)
         # print(json.dumps(self.db, indent=3))
         try:
@@ -44,21 +44,24 @@ class Database:
         except KeyError:
             print(f"Key {key} does not exist in DB")
 
-    def put(self, pair: str):
+    def put(self, pair: str) -> None:
         # print("PUT ", pair)
         key, value = pair.split("=")
         self.db = self.db | json.loads(f'{{"{key}": "{value}"}}')
         self.write_db_to_file()
         print(f"Successfully put {key}={value} in Database")
 
-    def put_from_file(self, file_path: str):
+    def put_from_file(self, file_path: str) -> None:
         self.db = self.db | self.read_file(file_path)
         self.write_db_to_file()
 
-    def delete(self, key: str):
+    def delete(self, key: str) -> None:
         # print("delete ", key)
         try:
             self.db.pop(key)
         except KeyError:
             print("Key does not exist in DB")
         self.write_db_to_file()
+
+    def show_db(self) -> None:
+        print(json.dumps(self.db, indent=3))
