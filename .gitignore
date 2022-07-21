@@ -36,3 +36,4 @@ venv.bak/
 songs_list.txt
 *.sqlite
 my_db
+*.db
