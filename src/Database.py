@@ -10,7 +10,7 @@ class Database:
             with open(self.db_location, 'w+') as my_db:
                 # some key and value are needed for json to read the file
                 json.dump({"__DEFAULT_KEY__": "__DEFAULT_VALUE__"}, my_db, indent=4)
-                my_db.seek(0, 0)
+                my_db.seek(0)
                 self.db: dict = json.load(my_db)
         else:
             with open(self.db_location) as my_db:
@@ -22,8 +22,10 @@ class Database:
             self.db: dict = json.load(my_db)
 
     def write_db_to_file(self) -> None:
+        # Very Poorly optimized
         with open(self.db_location, 'w') as my_file:
             json.dump(self.db, my_file, indent=4)
+
             # If we don't seek to start, the json won't be able to read since after end, it's all empty
             my_file.seek(0, 0)
 

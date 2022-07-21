@@ -5,7 +5,7 @@
 1. #### Clone this repo
 
 ```sh
-git clone --depth 1 -b master </URL>
+git clone --depth=1 -b master https://github.com/HritwikSinghal/pythonTraining
 ```
 
 2. #### Install requirements.
@@ -16,8 +16,19 @@ pip3 install -r requirements.txt
 
 #### Running.
 
+- Make sure the file is executable.
+
 ```sh
-python3 start.py --help   
+./start.py --help
+
+./start.py --p "X=10"
+./start.py --put "X=10"
+
+./start.py -g "X"
+./start.py --get "X"
+
+./start.py -d "X"
+./start.py --delete "X"
 ```
 
 ## License
