@@ -1,11 +1,13 @@
 import json
+import os
 
 import click
 
 from src import GET, PUT, DEL
 
-with open('my_db') as my_db:
-    db: dict = json.load(my_db)
+os.environ['db'] = 'my_db'
+with open(os.environ.get('db')) as my_file:
+    db: dict = json.load(my_file)
 
 
 @click.command()
