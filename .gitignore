@@ -34,4 +34,4 @@ venv.bak/
 .spyproject
 
 songs_list.txt
-
+*.sqlite
