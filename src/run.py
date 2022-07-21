@@ -14,7 +14,7 @@ def start(get, put, put_file_path, delete, count, name) -> None:
     for x in range(count):
         click.echo(f"Hello {name}!")
 
-    my_db = Database()
+    my_db = Database.Database()
 
     if get is not None:
         my_db.get(get)
