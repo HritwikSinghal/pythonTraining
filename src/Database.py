@@ -1,5 +1,4 @@
 import json
-from pathlib import Path
 
 
 class Database:
@@ -7,7 +6,8 @@ class Database:
     def __init__(self):
         self.db_location = "my_db.db"
         with open(self.db_location, 'w+') as my_db:
-            my_db.write("{}")
+            json.dump({"000000_____TTTT__________": "X"}, my_db, indent=4)
+            my_db.seek(0, 0)
             self.db: dict = json.load(my_db)
 
     def __int__(self, location: str):
@@ -17,7 +17,8 @@ class Database:
 
     def write_db_to_file(self) -> None:
         with open(self.db_location, 'r+') as my_file:
-            json.dump(self.db, my_file)
+            json.dump(self.db, my_file, indent=4)
+            my_file.seek(0, 0)
 
     def read_file(self, location) -> dict:
         with open(location) as my_file:
@@ -32,7 +33,8 @@ class Database:
 
     def put(self, pair: str):
         print("PUT ", pair)
-        self.db = self.db | json.loads(pair)
+        key, value = pair.split("=")
+        self.db = self.db | json.loads(f'{{"{key}": "{value}"}}')
         self.write_db_to_file()
 
     def put_from_file(self, file_path: str, db: dict):

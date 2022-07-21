@@ -5,7 +5,7 @@ from src import Database
 
 @click.command()
 @click.option('--get', help='Get the key from store', type=str)
-@click.option('--put', help='Put the key in store.', type=str)
+@click.option('--put', help='Put the key in store. (like "X=5") ', type=str)
 @click.option('--put_file_path', help='Put the key in store from a file.', type=str)
 @click.option('--delete', help='Delete the key from store', type=str)
 @click.option('--count', default=1, help='Number of greetings.', type=int)
