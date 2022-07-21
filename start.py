@@ -1,3 +1,5 @@
+#!/bin/python3
+
 from src import run
 
 if __name__ == '__main__':
