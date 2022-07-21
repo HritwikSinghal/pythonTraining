@@ -1,32 +1,19 @@
 import click
 
+from src import GET, PUT, DEL
+
 
 @click.command()
-@click.option('--GET', default=1, help='Get the key from store')
-def get_function(GET):
-    print(GET)
-
-
-@click.option('--put', default=1, help='Put the key in store.')
-def put_function(put):
-    print(put)
-
-
-@click.option('--DEL', default=1, help='Delete the key from store')
-def del_function(DEL):
-    print(DEL)
-
-@click.command()
-@click.option('--count', default=1, help='Number of greetings.')
-@click.option('--name', help='The person to greet.')
-def hello(count, name):
+@click.option('--get', help='Get the key from store', type=str)
+@click.option('--put', help='Put the key in store.', type=str)
+@click.option('--delete', help='Delete the key from store', type=str)
+@click.option('--count', default=1, help='Number of greetings.', type=int)
+@click.option('--name', default="Hritwik", help='The person to greet.', type=str)
+def start(get, put, delete, count, name):
     """Simple program that greets NAME for a total of COUNT times."""
     for x in range(count):
         click.echo(f"Hello {name}!")
 
-
-def start():
-    hello()
-    get_function()
-    put_function()
-    del_function()
+    GET.get_function(get)
+    PUT.put_function(put)
+    DEL.del_function(delete)
