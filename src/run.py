@@ -1,8 +1,11 @@
+import json
+
 import click
 
 from src import GET, PUT, DEL
 
-db = "my_db"
+with open('my_db') as my_db:
+    db: dict = json.load(my_db)
 
 
 @click.command()
@@ -13,7 +16,6 @@ db = "my_db"
 @click.option('--count', default=1, help='Number of greetings.', type=int)
 @click.option('--name', default="Hritwik", help='The person to greet.', type=str)
 def start(get, put, put_file_path, delete, count, name) -> None:
-    """Simple program that greets NAME for a total of COUNT times."""
     for x in range(count):
         click.echo(f"Hello {name}!")
 

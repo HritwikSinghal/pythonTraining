@@ -7,11 +7,11 @@ def read_from_file(file_path: str) -> dict:
     return data
 
 
-def put_from_file(file_path: str, db: str):
+def put_from_file(file_path: str, db: dict):
     data = read_from_file(file_path)
 
 
-def put_function(pair, db: str):
+def put_function(pair, db: dict):
     print("PUT ", pair)
 
     data: dict = json.loads(pair)
