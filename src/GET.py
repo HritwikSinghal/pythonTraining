@@ -1,6 +1,5 @@
 import json
-from sqlitedict import SqliteDict
 
 
-def get_function(key: str, db: SqliteDict):
+def get_function(key: str, db: str):
     print("get", key)

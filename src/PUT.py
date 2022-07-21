@@ -1,5 +1,4 @@
 import json
-from sqlitedict import SqliteDict
 
 
 def read_from_file(file_path: str) -> dict:
@@ -8,11 +7,11 @@ def read_from_file(file_path: str) -> dict:
     return data
 
 
-def put_from_file(file_path: str, db: SqliteDict):
+def put_from_file(file_path: str, db: str):
     data = read_from_file(file_path)
 
 
-def put_function(pair, db: SqliteDict):
+def put_function(pair, db: str):
     print("PUT ", pair)
 
     data: dict = json.loads(pair)

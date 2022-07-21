@@ -1,9 +1,8 @@
 import click
 
 from src import GET, PUT, DEL
-from sqlitedict import SqliteDict
 
-db = SqliteDict("my_db.sqlite")
+db = "my_db"
 
 
 @click.command()
