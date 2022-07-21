@@ -1,13 +1,6 @@
-import json
-import os
-
 import click
 
-from src import GET, PUT, DEL
-
-os.environ['db'] = 'my_db'
-with open(os.environ.get('db')) as my_file:
-    db: dict = json.load(my_file)
+from src import Database
 
 
 @click.command()
@@ -21,11 +14,13 @@ def start(get, put, put_file_path, delete, count, name) -> None:
     for x in range(count):
         click.echo(f"Hello {name}!")
 
+    my_db = Database()
+
     if get is not None:
-        GET.get_function(get, db)
+        my_db.get(get)
     if put is not None:
-        PUT.put_function(put, db)
+        my_db.put(put)
     if put_file_path is not None:
-        PUT.put_from_file(file_path=put_file_path, db=db),
+        my_db.put_from_file(file_path=put_file_path)
     if delete is not None:
-        DEL.del_function(delete, db)
+        my_db.delete(delete)
