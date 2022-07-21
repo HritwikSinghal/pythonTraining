@@ -23,9 +23,7 @@ class Database:
 
     def write_db_to_file(self) -> None:
         with open(self.db_location, 'w') as my_file:
-            my_file.seek(0, 0)
             json.dump(self.db, my_file, indent=4)
-
             # If we don't seek to start, the json won't be able to read since after end, it's all empty
             my_file.seek(0, 0)
 
@@ -38,7 +36,7 @@ class Database:
 
     def get(self, key: str):
         # print("get", key)
-        print(json.dumps(self.db, indent=3))
+        # print(json.dumps(self.db, indent=3))
         try:
             print(f'{key}={self.db[key]}')
         except KeyError:
