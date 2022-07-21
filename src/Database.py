@@ -22,7 +22,8 @@ class Database:
             self.db: dict = json.load(my_db)
 
     def write_db_to_file(self) -> None:
-        with open(self.db_location, 'r+') as my_file:
+        with open(self.db_location, 'w') as my_file:
+            my_file.seek(0, 0)
             json.dump(self.db, my_file, indent=4)
 
             # If we don't seek to start, the json won't be able to read since after end, it's all empty
@@ -37,6 +38,7 @@ class Database:
 
     def get(self, key: str):
         # print("get", key)
+        print(json.dumps(self.db, indent=3))
         try:
             print(f'{key}={self.db[key]}')
         except KeyError:
@@ -55,5 +57,8 @@ class Database:
 
     def delete(self, key: str):
         # print("delete ", key)
-        self.db.pop(key)
+        try:
+            self.db.pop(key)
+        except KeyError:
+            print("Key does not exist in DB")
         self.write_db_to_file()
