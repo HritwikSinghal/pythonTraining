@@ -18,6 +18,11 @@ def start(get, put, put_file_path, delete, count, name) -> None:
     for x in range(count):
         click.echo(f"Hello {name}!")
 
-    GET.get_function(get, db)
-    PUT.put_function(put, put_file_path, db)
-    DEL.del_function(delete, db)
+    if get is not None:
+        GET.get_function(get, db)
+    if put is not None:
+        PUT.put_function(put, db)
+    if put_file_path is not None:
+        PUT.put_from_file(file_path=put_file_path, db=db),
+    if delete is not None:
+        DEL.del_function(delete, db)

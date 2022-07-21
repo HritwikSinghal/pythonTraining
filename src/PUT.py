@@ -8,12 +8,16 @@ def read_from_file(file_path: str) -> dict:
     return data
 
 
-def put_function(pair, file_path: str, db: SqliteDict):
-    print("PUT ", pair, file_path)
-    data: dict
+def put_from_file(file_path: str, db: SqliteDict):
+    data = read_from_file(file_path)
 
-    if file_path is not None:
-        print("PUT FILE ", file_path)
-        data = read_from_file(file_path)
-    else:
-        data = json.loads(pair)
+
+def put_function(pair, db: SqliteDict):
+    print("PUT ", pair)
+
+    data: dict = json.loads(pair)
+
+    db["6TT"] = {"name": "first item"}
+    db["Hritwik"] = "Test"
+    db["Integer"] = 6
+    print(db["Hritwik"])
