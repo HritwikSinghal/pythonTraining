@@ -9,7 +9,7 @@ class Database:
         if not os.path.isfile(self.db_location):
             with open(self.db_location, 'w+') as my_db:
                 # some key and value are needed for json to read the file
-                json.dump({}, my_db, indent=4)
+                json.dump({"": ""}, my_db, indent=4)
                 my_db.seek(0)
                 self.db: dict = json.load(my_db)
         else:
