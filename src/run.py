@@ -24,17 +24,18 @@ def start(get, put, put_file_path, delete, show, truncate, client, server) -> No
     if server:
         # todo: get port from config file
         uvicorn.run(src.base.Server.app, host="127.0.0.1", port=8080, log_level="info")
-    if client:
+    elif client:
         src.client_test.start()
+
     if show:
         print(json.dumps(my_db.show(), indent=3))
-    if get is not None:
+    elif get is not None:
         print(my_db.get(get))
-    if put is not None:
+    elif put is not None:
         print(my_db.put(put))
-    if put_file_path is not None:
+    elif put_file_path is not None:
         my_db.put_from_file(file_path=put_file_path)
-    if delete is not None:
+    elif delete is not None:
         my_db.delete(delete)
-    if truncate:
+    elif truncate:
         my_db.truncate()
