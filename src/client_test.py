@@ -7,19 +7,12 @@ def client_context_test():
         client.put('foo', 'bar')
 
 
-def client_test():
+def start():
     # todo : take these args from config
     client = Client.Client(host='http://localhost', port=8080)
 
-    # print(client.help())
-    # print(client.show())
-    # client.put('foo', 'bar')
-    client.put('baz', 'foobar')
-    print(client.get('baz'))
-    print(client.show())
-
-    stat_code = client.delete('baz')
-    if stat_code == 200:
-        print(f"Key successfully deleted")
-
+    print(client.put('foo', 'bar'))
+    print(client.put("hello", "world"))
+    print(client.put("mnet", "media.net"))
+    # print(client.delete('baz'))
     print(client.show())

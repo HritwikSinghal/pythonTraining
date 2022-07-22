@@ -24,8 +24,7 @@ def start(get, put, put_file_path, delete, show, client, server) -> None:
         # todo: get port from config file
         uvicorn.run(src.base.Server.app, host="127.0.0.1", port=8080, log_level="info")
     if client:
-        # todo: fix this
-        src.client_test.client_test()
+        src.client_test.start()
     if show:
         print(json.dumps(my_db.show_db(), indent=3))
     if get is not None:
