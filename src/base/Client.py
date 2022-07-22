@@ -9,24 +9,24 @@ class Client:
 
     def help(self):
         """Show help page from server"""
-        return requests.get(self.url + "/help").json()
+        print(requests.get(self.url + "/help").json())
 
     def show(self):
         """list the entire contents of the remote kvstore """
-        return requests.get(self.url + "/show").json()
+        print(requests.get(self.url + "/show").json())
 
     def get(self, key: str):
         """Get the value of key from DB"""
-        params = {"key": key}
-        return requests.get(self.url, params=params)
+        params: dict = {"key": key}
+        print(requests.get(self.url, params=params))
 
     def put(self, key: str, value: str):
         """calls the server and returns the value of `key`"""
-        params = {"key": key, "value": value}
+        params: dict = {"key": key, "value": value}
         x = requests.put(url=self.url, params=params)
-        return x.json()
+        print(x.json())
 
-    def delete(self, key: str) -> int:
+    def delete(self, key: str):
         """Delete key from database"""
-        params = {"key": key}
-        return requests.delete(self.url, params=params).status_code
+        params: dict = {"key": key}
+        print(requests.delete(self.url, params=params).status_code)
