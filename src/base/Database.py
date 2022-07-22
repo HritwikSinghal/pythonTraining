@@ -36,20 +36,20 @@ class Database:
 
     ### --------------------------------------------------------------------- ###
 
-    def get(self, key: str) -> None:
+    def get(self, key: str) -> str:
         # print("get", key)
         # print(json.dumps(self.db, indent=3))
         try:
-            print(f'{key}={self.db[key]}')
+            return f'{key}={self.db[key]}'
         except KeyError:
-            print(f"Key {key} does not exist in DB")
+            return f"Key {key} does not exist in DB"
 
-    def put(self, pair: str) -> None:
+    def put(self, pair: str) -> str:
         # print("PUT ", pair)
         key, value = pair.split("=")
         self.db = self.db | json.loads(f'{{"{key}": "{value}"}}')
         self.write_db_to_file()
-        print(f"Successfully put {key}={value} in Database")
+        return f"Successfully put {key}={value} in Database"
 
     def put_from_file(self, file_path: str) -> None:
         self.db = self.db | self.read_file(file_path)
@@ -63,5 +63,5 @@ class Database:
             print("Key does not exist in DB")
         self.write_db_to_file()
 
-    def show_db(self) -> None:
-        print(json.dumps(self.db, indent=3))
+    def show_db(self) -> dict:
+        return self.db

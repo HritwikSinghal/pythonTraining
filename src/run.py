@@ -1,9 +1,10 @@
+import json
+
 import click
 import uvicorn
 
-import src.server
-import src.client.Client
-from src import Database
+import src.client_test
+from src.base import Database, Server
 
 
 # A very Poorly Optimized Key Value Store.DO NOT USE THIS
@@ -14,23 +15,23 @@ from src import Database
 @click.option('-f', '--put_file_path', help='Put the key in store from a file.', type=str)
 @click.option('-d', '--delete', help='Delete the key from store', type=str)
 @click.option('-s', '--show', help='Show DB', is_flag=True)
-@click.option('--client', help='start client', is_flag=True)
-@click.option('--server', help='start server', is_flag=True)
+@click.option('--client', help='start client app', is_flag=True)
+@click.option('--server', help='start DB server', is_flag=True)
 def start(get, put, put_file_path, delete, show, client, server) -> None:
     my_db = Database.Database()
 
     if server:
-        # src.server.start()
         # todo: get port from config file
-        uvicorn.run(src.server.app, host="127.0.0.1", port=8080, log_level="info")
+        uvicorn.run(src.base.Server.app, host="127.0.0.1", port=8080, log_level="info")
     if client:
-        src.client.Client.start()
+        # todo: fix this
+        src.client_test.client_test()
     if show:
-        my_db.show_db()
+        print(json.dumps(my_db.show_db(), indent=3))
     if get is not None:
-        my_db.get(get)
+        print(my_db.get(get))
     if put is not None:
-        my_db.put(put)
+        print(my_db.put(put))
     if put_file_path is not None:
         my_db.put_from_file(file_path=put_file_path)
     if delete is not None:
