@@ -87,6 +87,7 @@ class Database:
         """returns the database as dict"""
         return self.db
 
-    def truncate(self) -> None:
+    def truncate(self) -> str:
         """truncate current DB"""
         self._reset_db()
+        return f"Successfully truncated the DB"

@@ -36,3 +36,9 @@ class Client:
         """Delete key from database"""
         params: dict = {"key": key}
         print(requests.delete(self.url, params=params).json())
+
+    def truncate(self, i_am_sure=False):
+        if i_am_sure:
+            print(requests.post(self.url + "/truncate", params={"i_am_sure": i_am_sure}).json())
+        else:
+            print("You need to be sure to truncate the DB. use 'i_am_sure=True'")

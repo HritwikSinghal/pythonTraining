@@ -9,6 +9,8 @@ def client_context_test():
         client.show()
         client.delete('foo')
         client.show()
+        client.truncate()
+        client.show()
 
 
 def client_test():
@@ -21,6 +23,8 @@ def client_test():
     client.put("mnet", "media.net")
     client.show()
     client.delete('foo')
+    client.show()
+    client.truncate()
     client.show()
 
 

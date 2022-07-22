@@ -10,14 +10,15 @@ from src.base import Database, Server
 # A very Poorly Optimized Key Value Store.DO NOT USE THIS
 
 @click.command()
+@click.option('-s', '--show', help='Show DB', is_flag=True)
 @click.option('-g', '--get', help='Get the key from store', type=str)
 @click.option('-p', '--put', help='Put the key in store. (like "X=5") ', type=str)
 @click.option('-f', '--put_file_path', help='Put the key in store from a file.', type=str)
 @click.option('-d', '--delete', help='Delete the key from store', type=str)
-@click.option('-s', '--show', help='Show DB', is_flag=True)
+@click.option('-t', '--truncate', help='Show DB', is_flag=True)
 @click.option('--client', help='start client app', is_flag=True)
 @click.option('--server', help='start DB server', is_flag=True)
-def start(get, put, put_file_path, delete, show, client, server) -> None:
+def start(get, put, put_file_path, delete, show, truncate, client, server) -> None:
     my_db = Database.Database()
 
     if server:
@@ -35,3 +36,5 @@ def start(get, put, put_file_path, delete, show, client, server) -> None:
         my_db.put_from_file(file_path=put_file_path)
     if delete is not None:
         my_db.delete(delete)
+    if truncate:
+        my_db.truncate()
