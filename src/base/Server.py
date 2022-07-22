@@ -1,6 +1,3 @@
-# import FastAPI
-import json
-
 from fastapi import FastAPI
 from . import Database
 
@@ -16,18 +13,18 @@ my_db = Database.Database()
 # define the path operation function
 async def help() -> dict:
     """returns all available commands to user"""
-    # Todo : fix the help format to represent REST
     return {
-        "get key=X": "Get X from DB",
-        "put key=X, value=Y": "Put X to DB",
-        "delete key=X": "Delete X from DB",
-        "show": "Show DB"
+        "GET /help": "GET request on '/help' to Show this help. (curl http://localhost/help)",
+        "GET /show": "GET request on '/show' to Show DB. (curl http://localhost/show)",
+        "GET / key=foo": "GET request on '/' to get 'foo' from DB. (curl http://localhost/?key=foo)",
+        "PUT / key=foo value=bar": "PUT request on '/' to put 'foo' to DB. (curl -X PUT 'http://localhost/?key=foo&value=bar')",
+        "DELETE key=foo": "DELETE request on '/' to delete 'foo' from DB (curl -X DELETE 'http://localhost:8080/?key=foo')"
     }
 
 
 @app.get("/show")
-async def show_db() -> dict:
-    """returns DB
+async def show() -> dict:
+    """returns Database
     :return Database:dict, the database in dict format
     """
     return my_db.show()
