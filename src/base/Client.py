@@ -13,7 +13,7 @@ class Client:
 
     def show(self):
         """list the entire contents of the remote kvstore """
-        return requests.get(self.url + "/show")
+        return requests.get(self.url + "/show").json()
 
     def get(self, key: str):
         """Get the value of key from DB"""
