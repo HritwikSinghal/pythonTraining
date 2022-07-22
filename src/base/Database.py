@@ -76,6 +76,6 @@ class Database:
         except KeyError:
             return f"DELETE:: Key {key} does not exist in DB"
 
-    def show_db(self) -> dict:
+    def show(self) -> dict:
         """returns the database as dict"""
         return self.db

@@ -26,7 +26,7 @@ def start(get, put, put_file_path, delete, show, client, server) -> None:
     if client:
         src.client_test.start()
     if show:
-        print(json.dumps(my_db.show_db(), indent=3))
+        print(json.dumps(my_db.show(), indent=3))
     if get is not None:
         print(my_db.get(get))
     if put is not None:

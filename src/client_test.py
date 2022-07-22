@@ -14,5 +14,5 @@ def start():
     # client.put('foo', 'bar')
     # client.put("hello", "world")
     # client.put("mnet", "media.net")
-    client.delete('baz')
+    # client.delete('baz')
     client.show()

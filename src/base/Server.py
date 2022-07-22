@@ -30,7 +30,7 @@ async def show_db() -> dict:
     """returns DB
     :return Database:dict, the database in dict format
     """
-    return my_db.show_db()
+    return my_db.show()
 
 
 @app.get("/")
