@@ -41,10 +41,11 @@ class Client():
         return self.__get_content(self.url, params=params)
 
     def put(self, key: str, value: str):
-        params = {"key": key, "value": value}
         """calls the server and returns the value of `key`"""
+        params = {"key": key, "value": value}
         return self.__put_content(self.url, params=params)
 
-    def delete(self, key: str):
+    def delete(self, key: str) -> int:
         """Delete key from database"""
-        raise NotImplementedError
+        params = {"key": key}
+        return requests.delete(self.url, params=params).status_code

@@ -16,4 +16,10 @@ def client_test():
     # client.put('foo', 'bar')
     client.put('baz', 'foobar')
     print(client.get('baz'))
-    # print(client.show())
+    print(client.show())
+
+    stat_code = client.delete('baz')
+    if stat_code == 200:
+        print(f"Key successfully deleted")
+
+    print(client.show())
