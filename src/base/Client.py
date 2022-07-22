@@ -7,6 +7,13 @@ class Client:
         self.port = port
         self.url = f"{self.host}:{self.port}"
 
+    def __enter__(self):
+        self._client = Client(self.host, self.port)
+        return self._client
+
+    def __exit__(self, exc_type, exc_value, exc_traceback):
+        pass
+
     def help(self):
         """Show help page from server"""
         print(requests.get(self.url + "/help").json())
