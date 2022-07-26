@@ -3,15 +3,14 @@ from src.base import Client
 
 def client_context_test():
     with Client.Client(host='http://localhost', port=8080, db_name='client_context_test.db', api_version=1) as client:
-        if client.create():
-            client.put('foo', 'bar')
-            client.put("hello", "world")
-            client.put("mnet", "media.net")
-            client.show()
-            client.delete('foo')
-            client.show()
-            client.truncate(i_am_sure=True)
-            client.show()
+        client.put('foo', 'bar')
+        client.put("hello", "world")
+        client.put("mnet", "media.net")
+        client.show()
+        client.delete('foo')
+        client.show()
+        client.truncate(i_am_sure=True)
+        client.show()
 
 
 def client_test():
@@ -26,7 +25,7 @@ def client_test():
         client.show()
         client.delete('foo')
         client.show()
-        client.truncate(i_am_sure=True)
+        client.truncate(i_am_sure=False)
         client.show()
 
 

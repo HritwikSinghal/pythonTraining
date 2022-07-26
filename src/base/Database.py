@@ -18,7 +18,7 @@ class Database:
     def _load_db(self, db_file):
         self.db: dict = json.load(db_file)
 
-    def _reset_db(self):
+    def _reset_db(self) -> None:
         with open(self.__db_name, 'w+') as my_db:
             # some key and value are needed for json to read the file
             json.dump({"": ""}, my_db, indent=4)

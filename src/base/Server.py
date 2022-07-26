@@ -29,11 +29,11 @@ async def help() -> dict:
 async def create_DB(db_name: str) -> bool:
     try:
         my_db_holder.db = Database.Database(name=db_name)
+        return True
     except:
+        # log that shitt here.
         print(f"Something went wrong while creating the DB {db_name}")
         return False
-    else:
-        return True
 
 
 @app.get("/api/v1/show")
