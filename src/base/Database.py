@@ -4,28 +4,26 @@ import os.path
 
 class Database:
 
-    def __init__(self):
-        """default constructor, creates an empty DB and loads it into memory"""
-        self.db_location = "my_db.db"
-        if not os.path.isfile(self.db_location):
+    def __init__(self, name: str = "default.db"):
+        """initialize DB location, creates an empty DB and loads it into memory"""
+
+        self.__db_name = name
+
+        if not os.path.isfile(self.__db_name):
             self._reset_db()
         else:
-            with open(self.db_location) as my_db:
-                self.db: dict = json.load(my_db)
+            with open(self.__db_name) as my_db:
+                self._load_db(my_db)
 
-    def __int__(self, location: str):
-        """initialize DB location and import DB"""
-
-        self.db_location = location
-        with open(self.db_location) as my_db:
-            self.db: dict = json.load(my_db)
+    def _load_db(self, db_file):
+        self.db: dict = json.load(db_file)
 
     def _reset_db(self):
-        with open(self.db_location, 'w+') as my_db:
+        with open(self.__db_name, 'w+') as my_db:
             # some key and value are needed for json to read the file
             json.dump({"": ""}, my_db, indent=4)
             my_db.seek(0)
-            self.db: dict = json.load(my_db)
+            self._load_db(my_db)
 
     def _write_db_to_file(self) -> None:
         """write json data to file"""
@@ -33,7 +31,7 @@ class Database:
         # check lock, if its there then wait
         ### code
         # create lock
-        with open(self.db_location, 'w') as my_file:
+        with open(self.__db_name, 'w') as my_file:
             json.dump(self.db, my_file, indent=4)
 
             # If we don't seek to start, the json won't be able to read since after end, it's all empty
@@ -45,6 +43,13 @@ class Database:
         with open(location) as my_file:
             data: dict = json.load(my_file)
         return data
+
+    def set_db_name(self, name: str) -> str:
+        self.__db_name = name
+        return f"Successfully updated DB location to {self.__db_name}"
+
+    def get_db_name(self) -> str:
+        return self.__db_name
 
     ### --------------------------------------------------------------------- ###
 
@@ -90,4 +95,4 @@ class Database:
     def truncate(self) -> str:
         """truncate current DB"""
         self._reset_db()
-        return f"Successfully truncated the DB"
+        return f"TRUNCATE:: Successfully truncated the DB"

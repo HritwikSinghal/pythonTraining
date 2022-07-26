@@ -1,18 +1,40 @@
 import requests
 
+from requests.exceptions import ConnectionError
+
 
 class Client:
-    def __init__(self, host: str, port: int):
+    """Class for creating a client program"""
+
+    def __init__(self, host: str, port: int, db_name: str = "client.db", api_version: int = 1):
         self.host = host
         self.port = port
-        self.url = f"{self.host}:{self.port}"
+        self.api_version = api_version
+        self.url = f"{self.host}:{self.port}/api/v{self.api_version}"
+        self.db_name = db_name
+
+        self.check_connection_to_server()
 
     def __enter__(self):
-        self._client = Client(self.host, self.port)
-        return self._client
+        return Client(self.host, self.port, db_name=self.db_name, api_version=1)
 
-    def __exit__(self, exc_type, exc_value, exc_traceback):
-        pass
+    def __exit__(self, exc_type, exc_value, exc_traceback) -> str:
+        return "Client Exiting..."
+
+    # Todo: fix this
+    def check_connection_to_server(self) -> bool:
+        """check if server is reachable"""
+        try:
+            if requests.get(self.url).ok:
+                return True
+        except ConnectionError or Exception as e:
+            # print(e)
+            # raise Exception("Check if server is running properly")
+            return False
+
+    def create(self) -> bool:
+        """create a new DB with specified name"""
+        return requests.post(self.url + '/create', params={'db_name': self.db_name}).__bool__()
 
     def help(self):
         """Show help page from server"""
@@ -38,7 +60,5 @@ class Client:
         print(requests.delete(self.url, params=params).json())
 
     def truncate(self, i_am_sure=False):
-        if i_am_sure:
-            print(requests.post(self.url + "/truncate", params={"i_am_sure": i_am_sure}).json())
-        else:
-            print("You need to be sure to truncate the DB. use 'i_am_sure=True'")
+        params = {"i_am_sure": i_am_sure}
+        print(requests.post(self.url + "/truncate", params=params).json())
