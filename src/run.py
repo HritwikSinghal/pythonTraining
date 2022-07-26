@@ -3,8 +3,8 @@ import json
 import click
 import uvicorn
 
-import src.client_test
-from src.base import Database, Server
+from . import client_test
+from .base import Database, Server
 
 
 # A very Poorly Optimized Key Value Store.DO NOT USE THIS
@@ -23,9 +23,9 @@ def start(get, put, put_file_path, delete, show, truncate, client, server) -> No
 
     if server:
         # todo: get port from config file
-        uvicorn.run(src.base.Server.app, host="127.0.0.1", port=8080, log_level="info")
+        uvicorn.run(Server.app, host="127.0.0.1", port=8080, log_level="info")
     elif client:
-        src.client_test.start()
+        client_test.start()
 
     if show:
         print(json.dumps(my_db.show(), indent=3))
